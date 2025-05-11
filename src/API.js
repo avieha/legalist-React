@@ -27,11 +27,9 @@ export async function sendMessageToServer(formData) {
 }
 export async function getFileSummary(fileName) {
   try {
-    console.log("Filename:", fileName);
     const response = await fetch(
       `${import.meta.env.VITE_API_LOCAL}/get-summary/${fileName}`,
     );
-    console.log("Response:", response);
     return await response.json();
   } catch (error) {
     console.error("Error fetching file summary:", error);

@@ -110,7 +110,6 @@ function App() {
   const handleFileUploadOnly = async () => {
     console.log("handleFileUploadOnly");
     setFileHint("");
-    setInput("");
     setChat((prev) => [
       ...prev,
       { sender: "LegalistAI", text: "", loading: true, loadingType: "file" },
@@ -295,11 +294,7 @@ function App() {
     }
 
     try {
-      if (firstGroupChoiceRef.current && groupStage === "second") {
-        // Second group upload: submit both groups now
-        await handleFileGroups();
-      } else if (firstGroupChoiceRef.current) {
-        // First group upload: move to next stage and wait for second group
+      if (firstGroupChoiceRef.current) {
         await handleFileGroups();
       } else if (files.length > 0 && trimmed === "") {
         await handleFileUploadOnly();
@@ -313,7 +308,6 @@ function App() {
       ]);
     } finally {
       setIsLoading(false);
-      setInput("");
     }
   };
 
